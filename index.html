@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container form-container" id="data">
+        <form class="form">
+            <h2>Добавить студента:</h2>
+            <label>
+                Имя
+                <input class="input input--name" type="text">
+            </label>
+            <label>
+                Фамилия
+                <input class="input input--surname" type="text">
+            </label>
+            <label>
+                Отчество
+                <input class="input input--patronymic" type="text">
+            </label>
+            <label>
+                Дата рождения
+                <input class="input input--birthdate" type="date">
+            </label>
+            <label>
+                Год начала обучения
+                <input class="input input--startyear" type="text">
+            </label>
+            <label>
+                Факультет
+                <input class="input input--faculty" type="text">
+            </label>
+            <div class="error-field"></div>
+            <button class="button add-button" type="submit">Добавить</button>
+        </form>
+
+        <form class="form">
+            <h2>Отфильтровать таблицу:</h2>
+            <label>
+                ФИО
+                <input class="input input--fullname-filter" type="text">
+            </label>
+            <label>
+                Год начала обучения
+                <input class="input input--startyear-filter" type="number">
+            </label>
+            <label>
+                Год окончания обучения
+                <input class="input input--endyear-filter" type="number">
+            </label>
+            <label>
+                Факультет
+                <input class="input input--faculty-filter" type="text">
+            </label>
+            <button class="button filter-button" type="submit">Фильтровать</button>
+        </form>
+    </div>
+    <div class="container" id="root">
+            <h2 class="table-heading">Студенты:</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="heading--name">ФИО студента</th>
+                        <th class="heading--faculty">Факультет</th>
+                        <th class="heading--date">Дата рождения</th>
+                        <th class="heading--years">Годы обучения</th>
+                    </tr>
+                </thead>
+                <tbody class="table-data">
+
+                </tbody>
+            </table>
+    </div>
+
+</body>
+
+</html>
