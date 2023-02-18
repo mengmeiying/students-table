@@ -212,6 +212,27 @@ document.addEventListener('DOMContentLoaded', function () {
         facultyInput.value = '';
     }
 
+    function validateText(e) {
+            let value = e.target.value;
+            value = value.match(/[А-Яа-я\-\s]/g);
+            value = value ? value.join('') : ''
+        
+        
+            e.target.value = value;
+    }
+
+    function formatText(e) {
+        let value = e.target.value;
+        value = value.trim().replace(/\s+/g, ' ').replace(/-+/g, '-');
+        value = value.substring(0,1).toUpperCase() + value.substring(1, value.length).toLowerCase();
+    
+        e.target.value = value;
+    }
+
+    const textInputs = [nameInput, surnameInput, patronymicInput, facultyInput];
+    textInputs.forEach(e => e.addEventListener('input', validateText, e));
+    textInputs.forEach(e => e.addEventListener('blur', formatText, e))
+
     addButton.addEventListener('click', function (event) {
         event.preventDefault();
 
