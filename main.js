@@ -123,82 +123,136 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function validateDataInput() {
         let isInputCorrect = true;
+        function validateNameInput() {
+            const nameInputError = document.querySelector('.error-text--name');
+            if (nameInput.value.trim(' ').length <= 1) {
+                nameInput.classList.add('error');
+                isInputCorrect = false;
+                nameInputError.classList.add('error-text--active');
 
-        if (nameInput.value.trim(' ').length <= 1) {
-            nameInput.classList.add('error');
-            isInputCorrect = false;
-            errorField.textContent += "Поле имя должно состоять минимум из 2 символов"
+                nameInput.addEventListener('blur', validateNameInput);
+            }
+            else {
+                nameInput.classList.remove('error');
+                nameInputError.classList.remove('error-text--active');
+                nameInput.removeEventListener('blur', validateNameInput);
+            }
         }
-        else {
-            nameInput.classList.remove('error');
-        }
-
-        if (surnameInput.value.trim(' ').length <= 1) {
-            surnameInput.classList.add('error');
-            isInputCorrect = false;
-            errorField.textContent += "\nПоле фамилия должно состоять минимум из 2 символов";
-        }
-        else {
-            surnameInput.classList.remove('error');
-        }
-
-        if (patronymicInput.value.trim(' ').length <= 1) {
-            patronymicInput.classList.add('error');
-            isInputCorrect = false;
-            errorField.textContent += "\nПоле отчество должно состоять минимум из 2 символов";
-        }
-        else {
-            patronymicInput.classList.remove('error');
-        }
-
-        const dateOfBirth = new Date(birthdateInput.value);
-
-        if (birthdateInput.value.trim(' ').length <= 0) {
-            birthdateInput.classList.add('error');
-            isInputCorrect = false;
-            errorField.textContent += "\nПоле дата рождения не должно быть пустым";
-        }
-        else if (Date.now() < Date.parse(dateOfBirth)) {
-            birthdateInput.classList.add('error');
-            isInputCorrect = false;
-            errorField.textContent += "\nДата рождения не может быть больше текущей даты";
-
-        }
-        else if (dateOfBirth.getFullYear() < 1990) {
-
-            birthdateInput.classList.add('error');
-            isInputCorrect = false;
-            errorField.textContent += "\nДата рождения не может быть меньше 01.01.1900";
-
-        }
-        else {
-            birthdateInput.classList.remove('error');
+        
+        function validateSurnameInput() {
+            const surnameInputError = document.querySelector('.error-text--surname');
+            if (surnameInput.value.trim(' ').length <= 1) {
+                surnameInput.classList.add('error');
+                isInputCorrect = false;
+                surnameInputError.classList.add('error-text--active');
+                surnameInput.addEventListener('blur', validateSurnameInput);
+            }
+            else {
+                surnameInput.classList.remove('error');
+                surnameInputError.classList.remove('error-text--active');
+                surnameInput.removeEventListener('blur', validateSurnameInput);
+            }
         }
 
-        const date = new Date();
-        const currentYear = date.getFullYear();
-        if (startyearInput.value.trim(' ').length <= 1) {
-            startyearInput.classList.add('error');
-            isInputCorrect = false;
-            errorField.textContent += "\nПоле год начала обучения должно состоять минимум из 2 символов";
-        }
-        else if (startyearInput.value < 2000 || startyearInput.value > currentYear) {
-            startyearInput.classList.add('error');
-            isInputCorrect = false;
-            errorField.textContent += `\nГод начала обучения должен быть от 2000 до ${currentYear} года`;
-        }
-        else {
-            startyearInput.classList.remove('error');
+        function validatePatronymicInput() {
+            const patronymicInputError = document.querySelector('.error-text--patronymic');
+            if (patronymicInput.value.trim(' ').length <= 1) {
+                patronymicInput.classList.add('error');
+                isInputCorrect = false;
+                patronymicInputError.classList.add('error-text--active');
+                patronymicInput.addEventListener('blur', validatePatronymicInput);
+            }
+            else {
+                patronymicInput.classList.remove('error');
+                patronymicInputError.classList.remove('error-text--active');
+                patronymicInput.removeEventListener('blur', validatePatronymicInput);
+            }
         }
 
-        if (facultyInput.value.trim(' ').length <= 1) {
-            facultyInput.classList.add('error');
-            isInputCorrect = false;
-            errorField.textContent += "\nПоле факультет должно состоять минимум из 2 символов";
+        function validateDateofbirthInput() {
+            const dateOfBirth = new Date(birthdateInput.value);
+
+            const birthdateInputErrorEmpty = document.querySelector('.error-text--birthdate-empty');
+            const birthdateInputErrorLess = document.querySelector('.error-text--birthdate-less');
+            const birthdateInputErrorMore = document.querySelector('.error-text--birthdate-more');
+            birthdateInput.addEventListener('blur', validateDateofbirthInput);
+            if (birthdateInput.value.trim(' ').length <= 0) {
+                birthdateInput.classList.add('error');
+                isInputCorrect = false;
+                birthdateInputErrorEmpty.classList.add('error-text--active');
+                birthdateInputErrorLess.classList.remove('error-text--active');
+                birthdateInputErrorMore.classList.remove('error-text--active');
+            }
+            else if (Date.now() < Date.parse(dateOfBirth)) {
+                birthdateInput.classList.add('error');
+                isInputCorrect = false;
+                birthdateInputErrorLess.classList.add('error-text--active');
+                birthdateInputErrorEmpty.classList.remove('error-text--active');
+                birthdateInputErrorMore.classList.remove('error-text--active');
+            }
+            else if (dateOfBirth.getFullYear() < 1990) {
+                birthdateInput.classList.add('error');
+                isInputCorrect = false;
+                birthdateInputErrorMore.classList.add('error-text--active');
+                birthdateInputErrorEmpty.classList.remove('error-text--active');
+                birthdateInputErrorLess.classList.remove('error-text--active');
+            }
+            else {
+                birthdateInput.classList.remove('error');
+                birthdateInputErrorEmpty.classList.remove('error-text--active');
+                birthdateInputErrorLess.classList.remove('error-text--active');
+                birthdateInputErrorMore.classList.remove('error-text--active');
+                birthdateInput.removeEventListener('blur', validateDateofbirthInput);
+            }
         }
-        else {
-            facultyInput.classList.remove('error');
+
+        function validateStartyearInput() {
+            const date = new Date();
+            const currentYear = date.getFullYear();
+            const startyearInputErrorEmpty = document.querySelector('.error-text--startyear-empty');
+            const startyearInputErrorWrong = document.querySelector('.error-text--startyear-wrong');
+            startyearInput.addEventListener('blur', validateStartyearInput);
+            if (startyearInput.value.trim(' ').length <= 1) {
+                startyearInput.classList.add('error');
+                isInputCorrect = false;
+                startyearInputErrorEmpty.classList.add('error-text--active');
+                startyearInputErrorWrong.classList.remove('error-text--active');
+            }
+            else if (startyearInput.value < 2000 || startyearInput.value > currentYear) {
+                startyearInput.classList.add('error');
+                isInputCorrect = false;
+                startyearInputErrorWrong.classList.add('error-text--active');
+                startyearInputErrorEmpty.classList.remove('error-text--active');
+            }
+            else {
+                startyearInput.classList.remove('error');
+                startyearInputErrorEmpty.classList.remove('error-text--active');
+                startyearInputErrorWrong.classList.remove('error-text--active');
+                startyearInput.removeEventListener('blur', validateStartyearInput);
+            }
         }
+
+        function validateFacultyInput() {
+            const facultyInputError = document.querySelector('.error-text--faculty');
+            if (facultyInput.value.trim(' ').length <= 1) {
+                facultyInput.classList.add('error');
+                isInputCorrect = false;
+                facultyInputError.classList.add('error-text--active');
+                facultyInput.addEventListener('blur', validateFacultyInput);
+            }
+            else {
+                facultyInput.classList.remove('error');
+                facultyInputError.classList.remove('error-text--active');
+                facultyInput.removeEventListener('blur', validateFacultyInput);
+            }
+        }
+        
+        validateNameInput();
+        validateSurnameInput();
+        validatePatronymicInput();
+        validateDateofbirthInput();
+        validateStartyearInput();
+        validateFacultyInput();
 
         return isInputCorrect;
     }
@@ -236,7 +290,6 @@ document.addEventListener('DOMContentLoaded', function () {
     addButton.addEventListener('click', function (event) {
         event.preventDefault();
 
-        errorField.textContent = "";
         if (validateDataInput()) {
             const student = createStudent();
             arrayOfStudents.push(student);

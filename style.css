@@ -34,12 +34,33 @@ h2 {
     background-color: #fff;
 }
 
+.form--add label {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
 .input {
     width: 100%;
     padding: 10px 20px;
     border: 2px solid #d9d8dd;
     border-radius: 10px;
     font-family: inherit;
+}
+
+.form--add .input {
+    width: 50%;
+}
+
+.error-text {
+    position: absolute;
+    display: none;
+    left: 55%;
+    top: 20px;
+}
+
+.error-text--active {
+    display: block;
 }
 
 .input:focus {
@@ -111,8 +132,4 @@ h2 {
 
 .error {
     border: 2px solid red;
-}
-
-.error-field {
-    white-space: pre-line; 
 }

@@ -15,33 +15,41 @@
 
 <body>
     <div class="container form-container" id="data">
-        <form class="form">
+        <form class="form form--add">
             <h2>Добавить студента:</h2>
             <label>
                 <span class="label-text">Имя</span>
                 <input class="input input--name" type="text">
+                <span class="error-text error-text--name">Поле Имя должно состоять минимум из 2 символов</span>
             </label>
             <label>
                 <span class="label-text">Фамилия</span>
                 <input class="input input--surname" type="text">
+                <span class="error-text error-text--surname">Поле Фамилия должно состоять минимум из 2 символов</span>
             </label>
             <label>
                 <span class="label-text">Отчество</span>
                 <input class="input input--patronymic" type="text">
+                <span class="error-text error-text--patronymic">Поле Отчество должно состоять минимум из 2 символов</span>
             </label>
             <label>
                 <span class="label-text">Дата рождения</span>
                 <input class="input input--birthdate" type="date">
+                <span class="error-text error-text--birthdate-empty">Поле Дата рождения не должно быть пустым</span>
+                <span class="error-text error-text--birthdate-less">Дата рождения не может быть больше текущей даты</span>
+                <span class="error-text error-text--birthdate-more">Дата рождения не может быть меньше 01.01.1900</span>
             </label>
             <label>
                 <span class="label-text">Год начала обучения</span>
-                <input class="input input--startyear" type="text">
+                <input class="input input--startyear" type="number" min="2000">
+                <span class="error-text error-text--startyear-empty">Поле Год начала обучения должно состоять минимум из 2 символов</span>
+                <span class="error-text error-text--startyear-wrong">Год начала обучения должен быть от 2000 до 2023 года</span>
             </label>
             <label>
                 <span class="label-text">Факультет</span>
                 <input class="input input--faculty" type="text">
+                <span class="error-text error-text--faculty">Поле Факультет должно состоять минимум из 2 символов</span>
             </label>
-            <div class="error-field"></div>
             <button class="button add-button" type="submit">Добавить</button>
         </form>
 
